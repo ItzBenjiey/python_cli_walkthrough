@@ -7,12 +7,12 @@ Work wants an inventory app that:
             name
             cond
 """
-from models.item import Item
+from models.item import Item    # And Import Statement to make code code from other files available
 
 next_id = 0
-items = []
-# TODO Make a menu print out showing options
-def menu():
+items = []  # this will be used to store items
+
+def menu():     # prints menu options for user
     print("""
 1. List All Items
 2. Add New Item
@@ -21,24 +21,25 @@ def menu():
 5. Exit
 """)
 
-# List all Items
-def list_items():
+
+def list_items():       # writes all items to terminal 
     for item in items:
         print(item)
 
 # Add New Item
-def new_item():
-    global next_id
-    global items
+def new_item():         # gets user input for all need fields for an Item
+    global next_id      # Allow us access to the next_id number, To 
 
     name = input("Name: ")
     cond = input("Condition: ")
-    item_id = next_id
+    item_id = next_id       # Uses the global counter to give a unique ID to each "Item"
 
-    next_id += 1
+    next_id += 1        # Updates Id with new value so next one is 1 more
 
-    tmp = Item(item_id, name, cond)
-    items.append(tmp)
+    # This is the Class -> Item from the other file we imported
+    tmp = Item(item_id, name, cond) #Builds An Item/Stores it in tmp
+
+    items.append(tmp)  # Adds Item to global items array
 
 
 # Update Existing Item
@@ -50,11 +51,12 @@ def delete_item(itemId):
     pass
 
 # Make the menu questions that grab the data 
-def main():
+def main():         #starts the program off, holds the loop until exit.
     while True:
-        menu()
-        choice = input("> ")
+        menu()      #prints the Options to the Terminal
+        choice = input("> ")    # Takes use choice
 
+        # The conditional options: hands off the work to the functions above
         if choice == "1":
             list_items()
         elif choice == "2":
@@ -65,7 +67,7 @@ def main():
             pass
         elif choice == "5": # Exit
             exit()
-        else:
+        else:           # USer gave us bad input we let them know to looop again
             input("Invalid Input!\n(Press Enter to try again)")
 
 
